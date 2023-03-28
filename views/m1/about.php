@@ -26,8 +26,13 @@
 
         <tr class="row2">
             <td>
-                <div class="bio">
+                <div class="bio jalynnn">
+                    <?php echo Asset::img("jalynnn.jpeg") ?>
                     <h2 class="name">Jalynn Nicoly</h2>
+                    <p class = "body">
+                        I am a third year Colorado State Unviersity student with a major in computer science (CS). 
+                        I am a Research Assistant in the Natural User Interaction Lab and a Lead Teaching Assistant 
+                        for CS 163/4. 
                 </div>
             </td>
             <td>
