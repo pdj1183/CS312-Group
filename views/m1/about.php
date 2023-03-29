@@ -18,9 +18,9 @@
                 </div>
             </td>
             <td>
-                <div class="bio">
+                <div class="bio aaron">
+                    <?php echo Asset::img("aaron.jpeg") ?>
                     <h2 class="name">Aaron Marti</h2>
-                    <?php echo Asset::img("phillip.jpeg") ?>
                     <p class="body">
                         Hello! My name is Aaron Marti and I am going into my sixth semester as a CSU computer science student.
                         I look forward to my time in this class where i can get to know everyone involved with the class, classmates, TAs, and Logan himself.
