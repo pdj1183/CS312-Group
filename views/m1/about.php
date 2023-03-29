@@ -37,7 +37,7 @@
                     <?php echo Asset::img("jalynnn.jpg") ?>
                     <h2 class="name">Jalynn Nicoly</h2>
                     <p class="body">
-                        I am a third-year Computer Science (CS) major at Colorado State Unviersity. I am
+                        I am a third-year Computer Science (CS) major at Colorado State University. I am
                         a research assistant in CS department within the Natural User Interaction Lab. I
                         am also a Lead Teaching Assistant for CS 163/4. I grew up in Durango, CO but am 
                         ambitious to explore either the east or west coast.
