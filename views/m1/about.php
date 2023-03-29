@@ -13,8 +13,15 @@
     <table class="bios">
         <tr class="row1">
             <td>
-                <div class="bio">
-                    <h2 class="name">Aaron Chen</h2>
+               <div class="bio aaron">
+                   <?php echo Asset::img("aaron.png") ?>
+                   <h2 class="name">Aaron Chen</h2>
+                   <p class="body">
+                      I am a third year Computer Science major at Colorado State University.
+                      I love learning about code and computer systems.
+                      I also love many extracurricular activities such as making music, sports, and cooking.
+                      I am a born and raised Coloradan and think that there is no other place like it!
+                   </p>
                 </div>
             </td>
             <td>
