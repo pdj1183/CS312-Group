@@ -80,3 +80,17 @@ h1.intro {
     display: inline-block;
     text-align: center;
 }
+td{
+    border: solid black;
+    min-width: 30px;
+}
+th{
+    border: solid black;
+    min-width: 30px;
+
+}
+tr{
+    border: solid black;
+    min-width: 30px;
+
+}
