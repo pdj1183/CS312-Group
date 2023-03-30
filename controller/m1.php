@@ -18,17 +18,4 @@ class Controller_m1 extends Controller_Template
 		$this->template->current_page = "about";
 		$this->template->content = View::forge('m1/about');
 	}
-
-	public function ValidateInputParams() {
-		$rows = $_GET['rows'];
-		$colors = $_GET['colors'];
-
-		echo '<table>';
-		for ($i = 1; $i <= $rows; $i++) {
-			echo '<tr><td>' . $i . '</td><td>' . ($i * $i) . '</td></tr>';
-		}
-		echo '</table>';
-	}
 }
-
-?>
