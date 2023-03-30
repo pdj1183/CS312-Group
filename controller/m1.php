@@ -18,29 +18,17 @@ class Controller_m1 extends Controller_Template
 		$this->template->current_page = "about";
 		$this->template->content = View::forge('m1/about');
 	}
-	
-	public function ValidateInputParams($rows, $colors) {
-		// This is in regard to paragraph two but may not be neccessary
-		// due to including 'required' in the input type: 
 
-		// if(rows < 1 || rows > 26) {
-		// 	Print error is a work in progress
-		// 	try {
-		// 		$this->response->("Row is not valid", 400);
-		// 	} catch() {}
-		// }
-		// if(colors < 1 || colors > 10) {
-		// }
+	public function ValidateInputParams() {
+		$rows = $_GET['rows'];
+		$colors = $_GET['colors'];
 
-
-
-
-		// This is in regard to generating two tables - def uses a for loop
-		// Currently doesn't work
-
-		// echo '<table>';
-		// for ($i = 1; $i <= 10; $i++)
-		// echo '<tr><td>' . $i*$i . "</td></tr>";
-		// echo '</table>';
+		echo '<table>';
+		for ($i = 1; $i <= $rows; $i++) {
+			echo '<tr><td>' . $i . '</td><td>' . ($i * $i) . '</td></tr>';
+		}
+		echo '</table>';
 	}
 }
+
+?>
