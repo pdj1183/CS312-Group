@@ -4,13 +4,16 @@
     <title>Color Generator</title>
 </head>
 <body>
-    <label for = "rows" > Number of Rows/Columns: </label>
-    <input type = "number" id = "rows" name = "rows" min = "1" max = "26">
-    <label for = "colors" > Number of Colors: </label>
-    <input type = "number" id = "colors" name = "colors" min = "1" max = "10">
-    <input type = "submit" value = "Submit" >
+    <form action = "m1\Index" method = "get">
+        <label for = "rows" > Number of Rows/Columns: </label>
+        <input type = "number" id = "rows" name = "rows" min = "1" max = "26" required>
+        <br>
+        <label for = "colors" > Number of Colors: </label>
+        <input type = "number" id = "colors" name = "colors" min = "1" max = "10" required>
+        <br>
+        <input type = "submit" value = "Submit" >
+    </form>
 </body>
 </html>
 
-<!--Submit needs a follow up - not sure what this looks like yet
-    User input needs to be validated-->
+<!--rows and colors are passed to ValidateInputParams in m1.php-->
