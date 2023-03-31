@@ -6,7 +6,7 @@
 <div class="nav">
     <nav>
 
-        <ul class="navbar">
+        <ul class="navbar<?php if($current_page == 'home') echo 'active'; ?>">
             <li class="navItem">
                 <h1>The Color Company</h1>
             </li>
@@ -20,6 +20,9 @@
                 <a href="./about">About</a>
             </li>
         </ul>
+        <div class="navImg">
+            <?php echo Asset::img("312logo.svg") ?>
+        </div>
     </nav>
 </div>
 
