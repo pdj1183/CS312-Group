@@ -14,8 +14,24 @@
 </body>
 </html>
 
-<!--Submit needs a follow up - not sure what this looks like yet
-    User input needs to be validated-->
+<br>
+
+<table class = 'upper'>
+    <?php
+        if(isset($_POST['submit_btn'])){
+            $colors = $_POST['colors'];
+            for ($i = 0; $i < $colors; $i++) {
+                echo '<tr>';
+                echo '<td style="width: 20%;height: 25px"></td>';
+                echo '<td style="width: 80%;height: 25px"></td>';
+                echo '</tr>';
+            }
+        }
+    ?>
+</table>
+
+<br>
+
 <table class = 'lower'>
     <?php
         echo "<tr>";
