@@ -4,18 +4,25 @@
 }
 
 html {
-    width: 100vw;
 }
 
 /* Navbar CSS */
 
-nav ul {
+.navbar {
     height: 80px;
     background-attachment: fixed;
     background-image: radial-gradient(#7bbdce, #7e7bce);
     background-size: 100% 30%;
     text-align: left;
     width: 100vw;
+}
+
+.navbaractive {
+    position: relative;
+    background: none;
+    height: 80px;
+    width: 100%;
+    z-index: 5;
 }
 
 nav li {
@@ -25,10 +32,24 @@ nav li {
     display: inline-block;
 }
 
-nav li * {
+nav li a {
     text-decoration: none;
     padding: 10px 20px;
     color: #ffe8d1;
+}
+
+nav li h1 {
+    text-decoration: none;
+    padding: 10px 20px;
+    color: #ffe8d1;
+}
+
+.navImg img {
+    position: relative;
+    height: 150px;
+    float: right;
+    z-index: 3;
+    transform: translateY(-113px);
 }
 
 .navbar a:hover {
@@ -40,7 +61,54 @@ nav li * {
     text-decoration: underline;
 }
 
-/* Main CSS */
+/* Home CSS */
+.banner {
+    margin-top: -80px;
+    background-attachment: fixed;
+    background-image: radial-gradient(#bd427c, #babd42, #42bd83, #4542bd);
+    background-size: 600% 600%;
+    background-position: center;
+    animation: banner-animation 100s infinite alternate;
+    text-align: center;
+    color: rgb(255, 247, 98);
+    height: 100%;
+}
+
+@keyframes banner-animation {
+    0% {
+        background-position: top right;
+    }
+    25% {
+        background-position: bottom left;
+    }
+    50% {
+        background-position: top center;
+    }
+    75% {
+        background-position: center;
+    }
+    100% {
+        background-position: top right;
+    }
+}
+
+.content {
+    transform: translateY(300px);
+}
+
+.color {
+    font-size: 9rem;
+}
+
+.company {
+    font-size: 1.7rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 69px;
+}
+
+/* About CSS */
 
 .content {
     width: 100vw;
@@ -59,7 +127,7 @@ nav li * {
     border-radius: 30px;
 }
 
-img {
+.bio img {
     display: flex;
     margin-left: auto;
     margin-right: auto;
@@ -68,7 +136,7 @@ img {
     z-index: 2;
 }
 
-img:hover {
+.bio img:hover {
     transition: ease-in-out 0.3s 0.15s;
     width: 300px;
 }
@@ -80,3 +148,21 @@ h1.intro {
     display: inline-block;
     text-align: center;
 }
+<<<<<<< Updated upstream
+=======
+
+/* Color CSS */
+
+.lower td {
+    border: solid black;
+    min-width: 30px;
+}
+.lower th {
+    border: solid black;
+    min-width: 30px;
+}
+.lower tr {
+    border: solid black;
+    min-width: 30px;
+}
+>>>>>>> Stashed changes
