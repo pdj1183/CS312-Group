@@ -38,6 +38,7 @@
         if(isset($_POST['submit_btn'])){
             $rows=$_POST['rows'];
             $alphabet = [' ','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+            if ($rows !=0){
             for($i = 0;$i<$rows+1;$i++){
                 echo "<th>", $alphabet[$i],"</th>";
             }
@@ -52,6 +53,7 @@
                     echo "<td></td>";
                     }
                 }
+            }
             }
         }
         ?>
