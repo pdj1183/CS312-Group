@@ -1,22 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Color Generator</title>
-</head>
-<body>
-    <form method="post" action="color.php" >
-        <label for = "rows" > Number of Rows/Columns: </label>
-        <input type = "number" id = "rows" name = "rows" min = "1" max = "26">
-        <label for = "colors" > Number of Colors: </label>
-        <input type = "number" id = "colors" name = "colors" min = "1" max = "10">
-        <button type = "submit" name = "submit_btn" >Submit</button>
-    </form>
-</body>
-</html>
-
-<br>
-
-<table class = 'upper'>
+<?php echo Asset::css("main.css") ?>
+<title>Color Table</title>
+<table class='upper'>
     <?php
         if(isset($_POST['submit_btn'])){
             $colors = $_POST['colors'];
@@ -32,12 +18,14 @@
 
 <br>
 
-<table class = 'lower'>
+<table class='lower'>
     <?php
-        echo "<tr>";
+        
         if(isset($_POST['submit_btn'])){
+            echo "<tr>";
             $rows=$_POST['rows'];
             $alphabet = [' ','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+            if ($rows !=0){
             for($i = 0;$i<$rows+1;$i++){
                 echo "<th>", $alphabet[$i],"</th>";
             }
@@ -53,6 +41,15 @@
                     }
                 }
             }
+            }
         }
         ?>
 </table>
+
+<div class="print" id="print-view">
+    <button>
+        Print View
+    </button>
+</div>
+
+</html>

@@ -3,9 +3,6 @@
     padding: 0;
 }
 
-html {
-}
-
 /* Navbar CSS */
 
 .navbar {
@@ -149,19 +146,18 @@ h1.intro {
     text-align: center;
 }
 
-
 /* Color CSS */
 
+.lower table,
+.lower th,
 .lower td {
-    border: solid black;
-    min-width: 30px;
-}
-.lower th {
-    border: solid black;
-    min-width: 30px;
-}
-.lower tr {
-    border: solid black;
+    border: 1px solid black;
     min-width: 30px;
 }
 
+.upper table,
+.upper th,
+.upper td {
+    border: solid black;
+    min-width: 30px;
+}
