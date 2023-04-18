@@ -14,7 +14,7 @@
                 <a href="./index">Home</a>
             </li>
             <li class="navItem <?php if($current_page == 'color') echo 'active'; ?>">
-                <a href="./color">Color Generator</a>
+                <a href="./colorForm">Color Generator</a>
             </li>
             <li class="navItem <?php if($current_page == 'about') echo 'active'; ?>">
                 <a href="./about">About</a>
