@@ -1,6 +1,6 @@
 <head>
     <meta charset="utf-8" />
-    <?php echo Asset::css("main.css") ?>
+    <?php echo Asset::css($css) ?>
 </head>
 
 <div class="nav">
@@ -27,5 +27,6 @@
 </div>
 
 <div class="main">
+
     <?php echo $content?>
 </div>
