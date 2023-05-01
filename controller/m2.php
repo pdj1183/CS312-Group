@@ -1,6 +1,9 @@
 <?php
 
+
 use Fuel\Core\View;
+
+
 
 class Controller_m2 extends Controller_Template
 {
@@ -24,6 +27,8 @@ class Controller_m2 extends Controller_Template
 		$colors = Input::post('colors');
 
 		
+
+		
 		if ($row > 0 && $row <= 26 && $colors > 0 && $colors <= 10){
 			$this->template->current_page = "color";
 			$this->template->css = "main.css";
@@ -36,6 +41,7 @@ class Controller_m2 extends Controller_Template
 			$this->template->content = View::forge('m2/colorForm');
 		}
 	}
+	
 
 	public function action_about() {
 		$this->template->current_page = "about";

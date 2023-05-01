@@ -1,7 +1,26 @@
 <head>
     <meta charset="utf-8" />
-    <?php echo Asset::css($css) ?>
+    <?php
+
+use Fuel\Core\Asset;
+ echo Asset::css($css); ?>
+
 </head>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#print').click(function() {
+        var cssLink = $(
+            'link[href*="https://www.cs.colostate.edu:4444/~pdj1183/m2/assets/css/main.css"]'
+        );
+        cssLink.attr('href',
+            "https://www.cs.colostate.edu:4444/~pdj1183/m2/assets/css/print.css"
+
+        );
+    });
+});
+</script>
 
 <div class="nav">
     <nav>

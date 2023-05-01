@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
-<?php echo Asset::css("main.css") ?>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<?php
+
+use Fuel\Core\Asset;
+
+ echo Asset::css("main.css") ?>
+
 <script>
 function checkDropdowns(select) {
     var selects = document.querySelectorAll('.color-list select');
@@ -19,13 +23,7 @@ function checkDropdowns(select) {
     }
 }
 </script>
-<script>
-function print_view() {
-    $.ajax({
 
-    })
-}
-</script>
 <title> Color Table </title>
 <table class='upper'>
     <?php
@@ -92,8 +90,11 @@ function print_view() {
         ?>
 </table>
 
+
 <div>
-    <button class="print" id="print"> Print </button>
+    <button class="print" id="print">
+        <h1> Print </h1>
+    </button>
 </div>
 
 </html>

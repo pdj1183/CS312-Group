@@ -192,3 +192,26 @@ h1.intro {
     margin-left: auto;
     margin-right: auto;
 }
+
+button.print {
+    width: 100px;
+    height: 50px;
+    display: flex;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #7d99cf;
+    border-radius: 5px;
+}
+
+button.print:hover {
+    transition: ease-in-out 0.3s 0.2s;
+    background-color: #536892;
+    width: 110px;
+    height: 60px;
+}
+
+button.print h1 {
+    color: #ffe8d1;
+    margin: auto;
+}
