@@ -1,7 +1,7 @@
 <head>
     <meta charset="utf-8" />
     <?php
-
+$newLink = Asset::css("print.css");
 use Fuel\Core\Asset;
  echo Asset::css($css); ?>
 
@@ -12,12 +12,9 @@ use Fuel\Core\Asset;
 $(document).ready(function() {
     $('#print').click(function() {
         var cssLink = $(
-            'link[href*="https://www.cs.colostate.edu:4444/~pdj1183/m2/assets/css/main.css"]'
+            'link[href*="main.css"]'
         );
-        cssLink.attr('href',
-            "https://www.cs.colostate.edu:4444/~pdj1183/m2/assets/css/print.css"
-
-        );
+        cssLink.replaceWith(<?php echo json_encode($newLink); ?>);
     });
 });
 </script>
