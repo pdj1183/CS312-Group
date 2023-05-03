@@ -35,6 +35,7 @@ function checkDropdowns(select) {
                 echo '<tr>';
                 echo  '<td class="color-sel" style="width: 20%;height: 25px">';
                 echo '<div class="color-list">';
+                echo '<button class="radio" id="radio" <h1> </h1></button>';   
                 echo '<select onchange="checkDropdowns(this)">';
                 echo '<option value="color" selected diabled hidden>Select a Color</option>';
                 
