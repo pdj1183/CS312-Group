@@ -36,7 +36,7 @@ function checkDropdowns(select) {
                 echo '<tr id="' . $row_id . '">';
                 echo  '<td class="color-sel" style="width: 20%;height: 25px">';
                 echo '<div class="color-list">';
-                echo '<input type="radio" name="color" class="radio" value="'.$default_colors[$i].'"></input>';   
+                echo '<button type="radio" name="color" class="radio" value="'.$default_colors[$i].'"></button>';   
                 echo '<select onchange="checkDropdowns(this)">';
                 echo '<option value="color" selected diabled hidden>Select a Color</option>';
                 
@@ -58,7 +58,7 @@ function checkDropdowns(select) {
     ?>
 </table>
 <script>
-    const colorRadioButtons = document.querySelectorAll('.color-sel input[type="radio"]');
+    const colorRadioButtons = document.querySelectorAll('.color-sel button[type="radio"]');
     let selectedColor = 'black';
     colorRadioButtons.forEach(radioButton => {
         radioButton.addEventListener('click', () => {
