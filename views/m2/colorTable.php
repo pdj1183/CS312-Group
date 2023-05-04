@@ -57,7 +57,6 @@ function checkDropdowns(select) {
         }
     ?>
 </table>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     const colorRadioButtons = document.querySelectorAll('.color-sel input[type="radio"]');
     let selectedColor = null;
