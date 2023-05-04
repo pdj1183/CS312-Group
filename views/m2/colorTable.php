@@ -59,7 +59,7 @@ function checkDropdowns(select) {
 </table>
 <script>
     const colorRadioButtons = document.querySelectorAll('.color-sel input[type="radio"]');
-    let selectedColor = null;
+    let selectedColor = 'black';
     colorRadioButtons.forEach(radioButton => {
         radioButton.addEventListener('click', () => {
             selectedColor = radioButton.value;
