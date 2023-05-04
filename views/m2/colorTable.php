@@ -37,7 +37,7 @@ function checkDropdowns(select) {
                 echo  '<td class="color-sel" style="width: 20%;height: 25px">';
                 echo '<div class="color-list">';
                 echo '<button type="radio" name="color" class="radio" value="'.$default_colors[$i].'"></button>';   
-                echo '<select onchange="checkDropdowns(this)">';
+                echo '<select class="color-dropdown">';
                 echo '<option value="color" selected diabled hidden>Select a Color</option>';
                 
 
@@ -59,10 +59,18 @@ function checkDropdowns(select) {
 </table>
 <script>
     const colorRadioButtons = document.querySelectorAll('.color-sel button[type="radio"]');
-    let selectedColor = 'black';
+    const colorDropdowns = document.querySelectorAll('.color-dropdown');
+    let selectedColor = null;
     colorRadioButtons.forEach(radioButton => {
         radioButton.addEventListener('click', () => {
             selectedColor = radioButton.value;
+        });
+    });
+    colorDropdowns.forEach(dropdown => {
+        dropdown.addEventListener('change', () => {
+            selectedColor = dropdown.value;
+            const radioBtn = dropdown.previousElementSibling;
+            radioBtn.value = dropdown.value;
         });
     });
     </script>
