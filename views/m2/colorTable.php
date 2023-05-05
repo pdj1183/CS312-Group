@@ -36,7 +36,7 @@ function checkDropdowns(select) {
                 echo '<tr id="' . $row_id . '">';
                 echo  '<td class="color-sel" style="width: 20%;height: 25px">';
                 echo '<div class="color-list">';
-                echo '<button type="radio" name="color" class="radio" value="'.$default_colors[$i].'"></button>';   
+                echo '<button data-row="' . ($i+1) . '" type="radio" name="color" class="radio" value="'.$default_colors[$i].'"></button>';   
                 echo '<select class="color-dropdown">';
                 echo '<option value="color" selected diabled hidden>Select a Color</option>';
                 
@@ -50,7 +50,7 @@ function checkDropdowns(select) {
                 }
                 
                 echo '</select>';
-                echo '<td style="width: 80%;height: 25px"></td>';
+                echo '<td class="display-coord" style="width: 80%;height: 25px"></td>';
                 echo '</tr>';
             }
             
@@ -60,7 +60,7 @@ function checkDropdowns(select) {
 <script>
     const colorRadioButtons = document.querySelectorAll('.color-sel button[type="radio"]');
     const colorDropdowns = document.querySelectorAll('.color-dropdown');
-    let selectedColor = null;
+    let selectedColor = "black";
     colorRadioButtons.forEach(radioButton => {
         radioButton.addEventListener('click', () => {
             selectedColor = radioButton.value;
@@ -101,7 +101,8 @@ function checkDropdowns(select) {
                         echo "<td>",$i+1,"</td>";
                     }
                     else{
-                    echo "<td class='table-cell'></td>";
+                    $cell_id = $alphabet[$j] . ($i+1);
+                    echo "<td class='table-cell' id='$cell_id'></td>";
                     }
                 }
             }
@@ -111,22 +112,69 @@ function checkDropdowns(select) {
         ?>
 </table>
 <script>
-        const tableCells = document.querySelectorAll('.table-cell');
-        tableCells.forEach(tableCell => {
+    const tableCells = document.querySelectorAll('.table-cell');
+    const radioButtons = document.querySelectorAll('button[type="radio"]');
+    let selectedRow = 1;
+    let coord = {};
+
+    radioButtons.forEach(radioButton => {
+        radioButton.addEventListener('click', () => {
+            selectedRow = parseInt(radioButton.getAttribute('data-row'));
+            if (!coord[selectedRow]) {
+                coord[selectedRow] = [];
+            }
+        });
+    });
+
+    tableCells.forEach(tableCell => {
+        const cellId = tableCell.getAttribute('id');
+        if (cellId) {
+            const colIndex = tableCell.parentNode.rowIndex;
+            const rowIndex = tableCell.cellIndex;
             tableCell.addEventListener('click', () => {
-                if (!tableCell.parentNode.getAttribute('id') || tableCell.parentNode.getAttribute('id') !== 'colors') {
-                    if (tableCell.classList.contains(selectedColor)) {
-                        tableCell.className='';
+                if (tableCell.classList.contains(selectedColor)) {
+                    tableCell.className='';
+                    const rowId = 'color-row-' + selectedRow;
+                    const dispCoord = document.querySelector('#' + rowId + ' .display-coord');
+                    const index = coord[selectedRow].indexOf(cellId);
+                    if (index !== -1) {
+                        coord[selectedRow].splice(index, 1);
                     }
-                    else {
-                        tableCell.className='';
-                        tableCell.classList.add(selectedColor);
+                    if (coord[selectedRow].length > 0) {
+                        coord[selectedRow].sort();
+                        dispCoord.textContent = coord[selectedRow].join(", ");
+                    } else {
+                        dispCoord.textContent = '';
                     }
-                    const rowIndex = tableCell.parentNode.rowIndex;
-                    const colIndex = tableCell.cellIndex;
+                } else {
+                    for (const row in coord) {
+                        if (coord[row].indexOf(cellId) !== -1) {
+                            const index = coord[row].indexOf(cellId);
+                            coord[row].splice(index, 1);
+                            const rowId = 'color-row-' + row;
+                            const dispCoord = document.querySelector('#' + rowId + ' .display-coord');
+                            if (coord[row].length > 0) {
+                                coord[row].sort();
+                                dispCoord.textContent = coord[row].join(", ");
+                            } else {
+                                dispCoord.textContent = '';
+                            }
+                        }
+                    }
+                    tableCell.className='';
+                    tableCell.classList.add(selectedColor);
+                    const rowId = 'color-row-' + selectedRow;
+                    const dispCoord = document.querySelector('#' + rowId + ' .display-coord');
+                    if (!coord[selectedRow]) {
+                        coord[selectedRow] = [];
+                    }
+                    coord[selectedRow].push(cellId);
+                    coord[selectedRow].sort();
+                    dispCoord.textContent = coord[selectedRow].join(", ");
                 }
             });
-        });
+        }
+    });
 </script>
 
 <div>
