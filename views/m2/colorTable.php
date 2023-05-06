@@ -7,14 +7,12 @@ use Fuel\Core\Asset;
  echo Asset::css("main.css") ?>
 
 <script>
-function checkDropdowns(select) {
+function checkDropdowns(select,prevSelected) {
     var selects = document.querySelectorAll('.color-list select');
-
-
     for (var i = 0; i < selects.length; i++) {
         if (selects[i] != select && selects[i].value == select.value) {
             $('.fail_color').removeClass('hidden');
-            select.value = 'color';
+            select.value = prevSelected;
             break;
         } else {
             $('.fail_color').addClass('hidden');
@@ -36,7 +34,7 @@ function checkDropdowns(select) {
             echo  '<td class="color-sel" style="width: 20%;height: 25px">';
             echo '<div class="color-list">';
             echo '<button data-row="' . ($i+1) . '" type="radio" name="color" class="radio" value="'.$default_colors[$i].'"></button>';   
-            echo '<select class="color-dropdown" data-row="' . ($i+1) . '">';
+            echo '<select class="color-dropdown" data-row="' . ($i+1) . '" >';
             echo '<option value="color" selected diabled hidden>Select a Color</option>';
             echo '</div>';
             foreach($default_colors as $color) {
@@ -51,6 +49,7 @@ function checkDropdowns(select) {
             echo '<td class="display-coord" style="width: 80%;height: 25px"></td>';
             echo '</tr>';
         }   
+        echo '<p> Please Click The Radio Button Before Modifying Colors</p>';
     }
     ?>
 </table>
@@ -110,13 +109,12 @@ function checkDropdowns(select) {
     dropdowns.forEach(drop => {
     drop.addEventListener('change', () => {
         const prevSelected = selectedColor;
+        checkDropdowns(drop,prevSelected);
         selectedColor = drop.value;
         const radioBtn = drop.previousElementSibling;
         radioBtn.value = drop.value;
-        console.log(selectedColor);
         tableCells.forEach(cell => {
-            console.log(parseInt(drop.getAttribute('data-row')));
-            console.log(selectedRow);
+
                 if (cell.style.backgroundColor == prevSelected &&  parseInt(drop.getAttribute('data-row')) == selectedRow) {
                     cell.style.backgroundColor = selectedColor;
                 }
@@ -161,7 +159,6 @@ function checkDropdowns(select) {
                     }
                     tableCell.className='';
                     tableCell.style.backgroundColor = selectedColor;
-                    console.log(tableCell.classList);
                     const rowId = 'color-row-' + selectedRow;
                     const dispCoord = document.querySelector('#' + rowId + ' .display-coord');
                     if (!coord[selectedRow]) {
