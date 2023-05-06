@@ -136,6 +136,22 @@ function checkDropdowns(select) {
             }
         });
     });
+ 
+    colorDropdowns.forEach(dropdown => {
+        dropdown.addEventListener('change', () => {
+            selectedColor = dropdown.value;
+            for (const row in coord) {
+                coord[row].forEach(cellId => {
+                    const tableCell = document.getElementById(cellId);
+                    if (tableCell && tableCell.classList.contains(selectedColor)) {
+                        return;
+                    }
+                    tableCell.classList.remove(...tableCell.classList);
+                    tableCell.classList.add(selectedColor);
+                });
+            }
+        });
+    });
 
     tableCells.forEach(tableCell => {
         const cellId = tableCell.getAttribute('id');
