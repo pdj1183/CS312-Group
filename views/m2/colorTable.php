@@ -7,7 +7,7 @@ use Fuel\Core\Asset;
  echo Asset::css("main.css") ?>
 
 <script>
-function checkDropdowns(select,prevSelected) {
+function checkDropdowns(select, prevSelected) {
     var selects = document.querySelectorAll('.color-list select');
     for (var i = 0; i < selects.length; i++) {
         if (selects[i] != select && selects[i].value == select.value) {
@@ -23,7 +23,7 @@ function checkDropdowns(select,prevSelected) {
 
 <title> Color Table </title>
 <table class='upper'>
-<?php
+    <?php
     if(isset($_POST['submit_btn'])){
         $colors = $_POST['colors'];
         $default_colors = array("black", "blue", "brown", "green", "grey", "orange", "purple", "red", "teal", "yellow");
@@ -37,8 +37,8 @@ function checkDropdowns(select,prevSelected) {
             echo '<select class="color-dropdown" data-row="' . ($i+1) . '" >';
             echo '<option value="color" selected diabled hidden>Select a Color</option>';
             echo '</div>';
-            foreach($default_colors as $color) {
-                if ($color == $default_colors[$i]) {
+            foreach($color_entry as $color) {
+                if ($color == $color_entry[$i]) {
                     echo "<option value='$color' selected>$color</option>";
                 } else {
                     echo "<option value='$color'>$color</option>";
@@ -90,87 +90,88 @@ function checkDropdowns(select,prevSelected) {
         ?>
 </table>
 <script>
-    const tableCells = document.querySelectorAll('.table-cell');
-    const radioButtons = document.querySelectorAll('.color-sel button[type="radio"]');
-    let selectedRow = 1;
-    let coord = {};
-    const dropdowns = document.querySelectorAll('.color-dropdown');
-    let selectedColor = "black";
+const tableCells = document.querySelectorAll('.table-cell');
+const radioButtons = document.querySelectorAll('.color-sel button[type="radio"]');
+let selectedRow = 1;
+let coord = {};
+const dropdowns = document.querySelectorAll('.color-dropdown');
+let selectedColor = "black";
 
-    radioButtons.forEach(radioButton => {
-        radioButton.addEventListener('click', () => {
-            selectedColor = radioButton.value;
-            selectedRow = parseInt(radioButton.getAttribute('data-row'));
-            if (!coord[selectedRow]) {
-                coord[selectedRow] = [];
-            }
-        });
+radioButtons.forEach(radioButton => {
+    radioButton.addEventListener('click', () => {
+        selectedColor = radioButton.value;
+        selectedRow = parseInt(radioButton.getAttribute('data-row'));
+        if (!coord[selectedRow]) {
+            coord[selectedRow] = [];
+        }
     });
-    dropdowns.forEach(drop => {
+});
+dropdowns.forEach(drop => {
     drop.addEventListener('change', () => {
         const prevSelected = selectedColor;
-        checkDropdowns(drop,prevSelected);
+        checkDropdowns(drop, prevSelected);
         selectedColor = drop.value;
         const radioBtn = drop.previousElementSibling;
         radioBtn.value = drop.value;
         tableCells.forEach(cell => {
 
-                if (cell.style.backgroundColor == prevSelected &&  parseInt(drop.getAttribute('data-row')) == selectedRow) {
-                    cell.style.backgroundColor = selectedColor;
-                }
-            
+            if (cell.style.backgroundColor == prevSelected && parseInt(drop.getAttribute(
+                    'data-row')) == selectedRow) {
+                cell.style.backgroundColor = selectedColor;
+            }
+
         });
     });
-    });
-    tableCells.forEach(tableCell => {
-        const cellId = tableCell.getAttribute('id');
-        if (cellId) {
-            const colIndex = tableCell.parentNode.rowIndex;
-            const rowIndex = tableCell.cellIndex;
-            tableCell.addEventListener('click', () => {
-                if (tableCell.classList.contains(selectedColor)) {
-                    tableCell.className='';
-                    const rowId = 'color-row-' + selectedRow;
-                    const dispCoord = document.querySelector('#' + rowId + ' .display-coord');
-                    const index = coord[selectedRow].indexOf(cellId);
-                    if (index !== -1) {
-                        coord[selectedRow].splice(index, 1);
-                    }
-                    if (coord[selectedRow].length > 0) {
-                        coord[selectedRow].sort();
-                        dispCoord.textContent = coord[selectedRow].join(", ");
-                    } else {
-                        dispCoord.textContent = '';
-                    }
-                } else {
-                    for (const row in coord) {
-                        if (coord[row].indexOf(cellId) !== -1) {
-                            const index = coord[row].indexOf(cellId);
-                            coord[row].splice(index, 1);
-                            const rowId = 'color-row-' + row;
-                            const dispCoord = document.querySelector('#' + rowId + ' .display-coord');
-                            if (coord[row].length > 0) {
-                                coord[row].sort();
-                                dispCoord.textContent = coord[row].join(", ");
-                            } else {
-                                dispCoord.textContent = '';
-                            }
-                        }
-                    }
-                    tableCell.className='';
-                    tableCell.style.backgroundColor = selectedColor;
-                    const rowId = 'color-row-' + selectedRow;
-                    const dispCoord = document.querySelector('#' + rowId + ' .display-coord');
-                    if (!coord[selectedRow]) {
-                        coord[selectedRow] = [];
-                    }
-                    coord[selectedRow].push(cellId);
+});
+tableCells.forEach(tableCell => {
+    const cellId = tableCell.getAttribute('id');
+    if (cellId) {
+        const colIndex = tableCell.parentNode.rowIndex;
+        const rowIndex = tableCell.cellIndex;
+        tableCell.addEventListener('click', () => {
+            if (tableCell.classList.contains(selectedColor)) {
+                tableCell.className = '';
+                const rowId = 'color-row-' + selectedRow;
+                const dispCoord = document.querySelector('#' + rowId + ' .display-coord');
+                const index = coord[selectedRow].indexOf(cellId);
+                if (index !== -1) {
+                    coord[selectedRow].splice(index, 1);
+                }
+                if (coord[selectedRow].length > 0) {
                     coord[selectedRow].sort();
                     dispCoord.textContent = coord[selectedRow].join(", ");
+                } else {
+                    dispCoord.textContent = '';
                 }
-            });
-        }
-    });
+            } else {
+                for (const row in coord) {
+                    if (coord[row].indexOf(cellId) !== -1) {
+                        const index = coord[row].indexOf(cellId);
+                        coord[row].splice(index, 1);
+                        const rowId = 'color-row-' + row;
+                        const dispCoord = document.querySelector('#' + rowId + ' .display-coord');
+                        if (coord[row].length > 0) {
+                            coord[row].sort();
+                            dispCoord.textContent = coord[row].join(", ");
+                        } else {
+                            dispCoord.textContent = '';
+                        }
+                    }
+                }
+                tableCell.className = '';
+                tableCell.style.backgroundColor = selectedColor;
+                const rowId = 'color-row-' + selectedRow;
+                const dispCoord = document.querySelector('#' + rowId + ' .display-coord');
+                if (!coord[selectedRow]) {
+                    coord[selectedRow] = [];
+                }
+                coord[selectedRow].push(cellId);
+                coord[selectedRow].sort();
+                dispCoord.textContent = coord[selectedRow].join(", ");
+            }
+        });
+    }
+});
 </script>
 
 <div>
