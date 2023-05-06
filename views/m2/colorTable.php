@@ -41,10 +41,21 @@ function checkDropdowns(select) {
                 echo '<option value="color" selected diabled hidden>Select a Color</option>';
                 
 
-                foreach($default_colors as $color) {
-                    if ($color == $default_colors[$i]) {
-                        echo "<option value='$color' selected>$color</option>";
-                    } else {
+                if (!empty($_POST['color'])) {
+                    $entered_colors = $_POST['color'];
+
+                    foreach ($entered_colors as $color) {
+                        if ($color == $entered_colors[$i]) {
+                            echo "<option value='$color' selected>$color</option>";
+                            $selected_color = $color;
+                        } else {
+                            echo "<option value='$color'>$color</option>";
+                        }
+                    }
+                } else {
+                    echo '<option value="color" selected disabled hidden>Select a Color</option>';
+
+                    foreach ($default_colors as $color) {
                         echo "<option value='$color'>$color</option>";
                     }
                 }
