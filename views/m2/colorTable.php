@@ -9,8 +9,7 @@ use Fuel\Core\Asset;
 <script>
 function checkDropdowns(select) {
     var selects = document.querySelectorAll('.color-list select');
-    console.log(selects);
-    console.log(select)
+
 
     for (var i = 0; i < selects.length; i++) {
         if (selects[i] != select && selects[i].value == select.value) {
@@ -26,55 +25,35 @@ function checkDropdowns(select) {
 
 <title> Color Table </title>
 <table class='upper'>
-    <?php
-        if(isset($_POST['submit_btn'])){
-            $colors = $_POST['colors'];
-            $default_colors = array("black", "blue", "brown", "green", "grey", "orange", "purple", "red", "teal", "yellow");
-            
-            for ($i = 0; $i < $colors; $i++) {
-                $row_id = 'color-row-' . ($i+1);
-                echo '<tr id="' . $row_id . '">';
-                echo  '<td class="color-sel" style="width: 20%;height: 25px">';
-                echo '<div class="color-list">';
-                echo '<button data-row="' . ($i+1) . '" type="radio" name="color" class="radio" value="'.$default_colors[$i].'"></button>';   
-                echo '<select class="color-dropdown">';
-                echo '<option value="color" selected diabled hidden>Select a Color</option>';
-                
-
-                foreach($default_colors as $color) {
-                    if ($color == $default_colors[$i]) {
-                        echo "<option value='$color' selected>$color</option>";
-                    } else {
-                        echo "<option value='$color'>$color</option>";
-                    }
+<?php
+    if(isset($_POST['submit_btn'])){
+        $colors = $_POST['colors'];
+        $default_colors = array("black", "blue", "brown", "green", "grey", "orange", "purple", "red", "teal", "yellow");
+        
+        for ($i = 0; $i < $colors; $i++) {
+            $row_id = 'color-row-' . ($i+1);
+            echo '<tr id="' . $row_id . '">';
+            echo  '<td class="color-sel" style="width: 20%;height: 25px">';
+            echo '<div class="color-list">';
+            echo '<button data-row="' . ($i+1) . '" type="radio" name="color" class="radio" value="'.$default_colors[$i].'"></button>';   
+            echo '<select class="color-dropdown" data-row="' . ($i+1) . '">';
+            echo '<option value="color" selected diabled hidden>Select a Color</option>';
+            echo '</div>';
+            foreach($default_colors as $color) {
+                if ($color == $default_colors[$i]) {
+                    echo "<option value='$color' selected>$color</option>";
+                } else {
+                    echo "<option value='$color'>$color</option>";
                 }
-                
-                echo '</select>';
-                echo '<td class="display-coord" style="width: 80%;height: 25px"></td>';
-                echo '</tr>';
             }
             
-        }
+            echo '</select>';
+            echo '<td class="display-coord" style="width: 80%;height: 25px"></td>';
+            echo '</tr>';
+        }   
+    }
     ?>
 </table>
-<script>
-    const colorRadioButtons = document.querySelectorAll('.color-sel button[type="radio"]');
-    const colorDropdowns = document.querySelectorAll('.color-dropdown');
-    let selectedColor = "black";
-    colorRadioButtons.forEach(radioButton => {
-        radioButton.addEventListener('click', () => {
-            selectedColor = radioButton.value;
-        });
-    });
-    colorDropdowns.forEach(dropdown => {
-        dropdown.addEventListener('change', () => {
-            selectedColor = dropdown.value;
-            const radioBtn = dropdown.previousElementSibling;
-            radioBtn.value = dropdown.value;
-        });
-    });
-    </script>
-
 <div class="fail_color hidden">
     <h1> Oh No! </h1>
     <p> You can only select a color once! </p>
@@ -113,19 +92,38 @@ function checkDropdowns(select) {
 </table>
 <script>
     const tableCells = document.querySelectorAll('.table-cell');
-    const radioButtons = document.querySelectorAll('button[type="radio"]');
+    const radioButtons = document.querySelectorAll('.color-sel button[type="radio"]');
     let selectedRow = 1;
     let coord = {};
+    const dropdowns = document.querySelectorAll('.color-dropdown');
+    let selectedColor = "black";
 
     radioButtons.forEach(radioButton => {
         radioButton.addEventListener('click', () => {
+            selectedColor = radioButton.value;
             selectedRow = parseInt(radioButton.getAttribute('data-row'));
             if (!coord[selectedRow]) {
                 coord[selectedRow] = [];
             }
         });
     });
-
+    dropdowns.forEach(drop => {
+    drop.addEventListener('change', () => {
+        const prevSelected = selectedColor;
+        selectedColor = drop.value;
+        const radioBtn = drop.previousElementSibling;
+        radioBtn.value = drop.value;
+        console.log(selectedColor);
+        tableCells.forEach(cell => {
+            console.log(parseInt(drop.getAttribute('data-row')));
+            console.log(selectedRow);
+                if (cell.style.backgroundColor == prevSelected &&  parseInt(drop.getAttribute('data-row')) == selectedRow) {
+                    cell.style.backgroundColor = selectedColor;
+                }
+            
+        });
+    });
+    });
     tableCells.forEach(tableCell => {
         const cellId = tableCell.getAttribute('id');
         if (cellId) {
@@ -162,7 +160,8 @@ function checkDropdowns(select) {
                         }
                     }
                     tableCell.className='';
-                    tableCell.classList.add(selectedColor);
+                    tableCell.style.backgroundColor = selectedColor;
+                    console.log(tableCell.classList);
                     const rowId = 'color-row-' + selectedRow;
                     const dispCoord = document.querySelector('#' + rowId + ' .display-coord');
                     if (!coord[selectedRow]) {
